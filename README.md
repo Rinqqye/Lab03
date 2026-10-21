@@ -225,60 +225,6 @@
 
 Для построения концептуальной модели используется сервис [dbdiagram.io](https://dbdiagram.io/). Следующий код необходимо вставить в редактор сервиса. После построения диаграмму можно экспортировать в PNG и добавить в репозиторий.
 
-```dbml
-Table readers {
-  id int [pk, increment]
-  last_name varchar
-  first_name varchar
-  phone varchar
-  email varchar
-  registration_date date
-}
-
-Table books {
-  id int [pk, increment]
-  title varchar
-  isbn varchar
-  publication_year int
-  publisher varchar
-}
-
-Table authors {
-  id int [pk, increment]
-  last_name varchar
-  first_name varchar
-}
-
-Table book_copies {
-  id int [pk, increment]
-  book_id int [not null, ref: > books.id]
-  inventory_number varchar [unique]
-  condition varchar
-  status varchar
-}
-
-Table loans {
-  id int [pk, increment]
-  reader_id int [not null, ref: > readers.id]
-  copy_id int [not null, ref: > book_copies.id]
-  issue_date date
-  due_date date
-  return_date date
-  status varchar
-}
-
-Table book_authors {
-  book_id int [not null, ref: > books.id]
-  author_id int [not null, ref: > authors.id]
-
-  indexes {
-    (book_id, author_id) [pk]
-  }
-}
-```
-
-После экспорта диаграмму рекомендуется сохранить в репозитории под именем `library_er_diagram.png`.
-
 Чтобы отобразить схему в README, добавьте следующую строку после загрузки изображения:
 
 `![Концептуальная модель библиотечной системы](diogram.jpg)`
